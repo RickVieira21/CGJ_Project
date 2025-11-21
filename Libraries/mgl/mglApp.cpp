@@ -158,7 +158,7 @@ void displayInfo() {
             << std::endl;
   std::cout << "GLEW version " << glewGetString(GLEW_VERSION) << std::endl;
   std::cout << "GLFW version " << glfwGetVersionString() << std::endl;
-  std::cout << GLM_VERSION_MESSAGE << std::endl;
+  //std::cout << GLM_VERSION_MESSAGE << std::endl;
 }
 
 void Engine::init() {

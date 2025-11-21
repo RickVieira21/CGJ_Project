@@ -15,16 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\..\Users\gonca\Downloads\02-hello-2d-world-2025\02-hello-2d-world-2025\src\hello-2d-world.cpp">
+    <ClCompile Include="Libraries\mgl\mglError.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\Users\gonca\Downloads\02-hello-2d-world-2025\02-hello-2d-world-2025\mgl\mglApp.cpp">
+    <ClCompile Include="Libraries\mgl\mglShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\Users\gonca\Downloads\02-hello-2d-world-2025\02-hello-2d-world-2025\mgl\mglError.cpp">
+    <ClCompile Include="Libraries\mgl\mglApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\Users\gonca\Downloads\02-hello-2d-world-2025\02-hello-2d-world-2025\mgl\mglShader.cpp">
+    <ClCompile Include="hello-2d-world.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
