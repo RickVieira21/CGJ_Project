@@ -118,6 +118,9 @@ void MyApp::destroyBufferObjects() {
 const glm::mat4 I(1.0f);
 const glm::mat4 M =
 glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, -1.0f, 0.0f));
+//third triangle position
+const glm::mat4 Tri3 =
+glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
 
 void MyApp::drawScene() {
     // Drawing directly in clip space
@@ -130,6 +133,11 @@ void MyApp::drawScene() {
         reinterpret_cast<GLvoid*>(0));
 
     glUniformMatrix4fv(MatrixId, 1, GL_FALSE, glm::value_ptr(M));
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE,
+        reinterpret_cast<GLvoid*>(0));
+
+    //Drawing third triangle directly in clip space
+    glUniformMatrix4fv(MatrixId, 1, GL_FALSE, glm::value_ptr(Tri3));
     glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE,
         reinterpret_cast<GLvoid*>(0));
 
