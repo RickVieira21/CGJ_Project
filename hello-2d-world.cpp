@@ -115,11 +115,14 @@ void MyApp::destroyBufferObjects() {
 
 ////////////////////////////////////////////////////////////////////////// SCENE
 
+//Identity Matrix
 const glm::mat4 I(1.0f);
-const glm::mat4 M =
-glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, -1.0f, 0.0f));
-//third triangle position
-const glm::mat4 Tri3 =
+//Orange Triangle position Operations
+const glm::mat4 OrangeTri =
+glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, -1.0f, 0.0f)),
+    glm::vec3(1.2f,0.8f,1.0f));
+//Blue Large Triangle position Operations
+const glm::mat4 BlueTri =
 glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
 
 void MyApp::drawScene() {
@@ -132,12 +135,13 @@ void MyApp::drawScene() {
     glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE,
         reinterpret_cast<GLvoid*>(0));
 
-    glUniformMatrix4fv(MatrixId, 1, GL_FALSE, glm::value_ptr(M));
+    //Drawing Orange Triangle
+    glUniformMatrix4fv(MatrixId, 1, GL_FALSE, glm::value_ptr(OrangeTri));
     glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE,
         reinterpret_cast<GLvoid*>(0));
 
-    //Drawing third triangle directly in clip space
-    glUniformMatrix4fv(MatrixId, 1, GL_FALSE, glm::value_ptr(Tri3));
+    //Drawing Large Blue Triangle (TODO)
+    glUniformMatrix4fv(MatrixId, 1, GL_FALSE, glm::value_ptr(BlueTri));
     glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE,
         reinterpret_cast<GLvoid*>(0));
 
