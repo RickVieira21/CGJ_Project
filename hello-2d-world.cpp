@@ -121,23 +121,57 @@ void MyApp::destroyBufferObjects() {
 //Identity Matrix
 //const glm::mat4 I(1.0f);
 
-//Orange Triangle (DONE)
+
+//Small Orange Triangle (DONE!)
 const glm::mat4 OrangeTri =
-glm::translate(glm::scale(glm::mat4(1.0f), glm::vec3(1.2f, 0.8f, 1.0f)),
-    glm::vec3(-0.7f, -1.0f, 1.0f));
+glm::translate(glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 0.5f, 1.0f)),
+    glm::vec3(-1.0f, -1.0f, 1.0f));
+
+
+//Small Blue Triangle (DONE!)
+const glm::mat4 BlueTri =
+glm::translate(glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 0.5f, 1.0f)),
+    glm::vec3(0.1f, -1.0f, 1.0f));
+
+
+//Medium Purple Triangle (DONE!)
+const glm::mat4 MediumTri =
+glm::translate(
+    glm::rotate(
+        glm::scale(glm::mat4(1.0f), glm::vec3(0.77f, 1.5f, 1.0f)),
+        glm::radians(-90.0f),        // rotação 90º para a direita
+        glm::vec3(0.0f, 0.0f, 1.0f)  // eixo Z (2D)
+    ),
+    glm::vec3(-0.5f, 0.2f, 1.0f)
+);
+
 
 //Large Blue Triangle (TODO)
 const glm::mat4 LargeBlueTri =
-glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, 0.0f, 0.0f));
+glm::translate(
+    glm::rotate(
+        glm::scale(glm::mat4(1.0f), glm::vec3(2.5f, 1.0f, 1.0f)),
+        glm::radians(0.0f),        
+        glm::vec3(0.0f, 0.0f, 1.0f)  // eixo Z (2D)
+    ),
+    glm::vec3(0.0f, 0.0f, 1.0f)
+);
+
 
 //Large Pink Triangle (TODO)
 const glm::mat4 LargePinkTri =
 glm::translate(
-    glm::rotate(glm::mat4(1.0f), 45.0f, glm::vec3(1.0f, 1.0f, 1.0f)),
-    glm::vec3(0.0f,-1.0f,0.0f));
-//glm::rotate(glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 1.0f, 1.0f)),
-//    glm::radians(60.0f),
-//    glm::vec3(1.0f,1.0f,0.0f));
+    glm::rotate(glm::mat4(1.0f), glm::radians(45.0f), glm::vec3(1.0f, 1.0f, 1.0f)),
+    glm::vec3(1.0f,-1.0f,0.0f));
+
+
+//Green Square
+
+
+
+//Orange Parallelogram
+
+
 
 
 void MyApp::drawScene() {
@@ -152,10 +186,14 @@ void MyApp::drawScene() {
     //glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE,
     //    reinterpret_cast<GLvoid*>(0));
 
-    //Drawing Orange Triangle
+    //Drawing Small Orange Triangle
     glUniformMatrix4fv(MatrixId, 1, GL_FALSE, glm::value_ptr(OrangeTri));
     glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE,
         reinterpret_cast<GLvoid*>(0));
+
+    //Drawing Small Blue Triangle
+    glUniformMatrix4fv(MatrixId, 1, GL_FALSE, glm::value_ptr(BlueTri));
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE, reinterpret_cast<GLvoid*>(0));
 
     //Drawing Large Blue Triangle
     glUniformMatrix4fv(MatrixId, 1, GL_FALSE, glm::value_ptr(LargeBlueTri));
@@ -166,6 +204,17 @@ void MyApp::drawScene() {
     glUniformMatrix4fv(MatrixId, 1, GL_FALSE, glm::value_ptr(LargePinkTri));
     glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE,
         reinterpret_cast<GLvoid*>(0));
+
+    //Medium Purple Triangle
+    glUniformMatrix4fv(MatrixId, 1, GL_FALSE, glm::value_ptr(MediumTri));
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_BYTE, reinterpret_cast<GLvoid*>(0));
+
+    //Green Square
+
+
+    //Orange Parallelogram
+
+
 
     Shaders->unbind();
     glBindVertexArray(0);
