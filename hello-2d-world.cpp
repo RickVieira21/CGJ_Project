@@ -74,19 +74,21 @@ void MyApp::createShaderProgram() {
 
     MatrixId = Shaders->Uniforms["Matrix"].index;
 
-    // guardar o índice do uniform de cor se quiseres
+    // guardar o índice do uniform de cor 
     ColorId = Shaders->Uniforms["uColor"].index;
 
+    //para teste
+    /*
     std::cout << "Uniforms in shader:" << std::endl;
     for (auto& u : Shaders->Uniforms) {
         std::cout << "  " << u.first << " : index = " << u.second.index << std::endl;
     }
+    */
 
 }
 
 //////////////////////////////////////////////////////////////////// VAOs & VBOs
 
-//Tudo branco
 // Base Right Triangle (unitário 2D)             //Tudo branco
 const Vertex RightTriangleVertices[] = {
     {{0.0f, 0.0f, 0.0f, 1.0f}, {1.0f, 1.0f, 1.0f, 1.0f}},  // bottom-left
@@ -157,88 +159,34 @@ void MyApp::destroyBufferObjects() {
 //OPERATION ORDER: SCALE -> ROTATE -> TRANSLATE
 // TRANSLATE(ROTATE(SCALE(MATRIX)))
 
-/*
-
-
-//Small Orange Triangle (DONE!)
-const glm::mat4 OrangeTri =
-glm::translate(glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 0.5f, 1.0f)),
-    glm::vec3(-1.0f, -1.0f, 1.0f));
-
-
-//Small Blue Triangle (DONE!)
-const glm::mat4 BlueTri =
-glm::translate(glm::scale(glm::mat4(1.0f), glm::vec3(1.0f, 0.5f, 1.0f)),
-    glm::vec3(0.1f, -1.0f, 1.0f));
-
-
-//Medium Purple Triangle (DONE!)
-const glm::mat4 MediumTri =
-glm::translate(
-    glm::rotate(
-        glm::scale(glm::mat4(1.0f), glm::vec3(0.77f, 1.5f, 1.0f)),
-        glm::radians(-90.0f),        // rotação 90º para a direita
-        glm::vec3(0.0f, 0.0f, 1.0f)  // eixo Z (2D)
-    ),
-    glm::vec3(-0.5f, 0.2f, 1.0f)
-);
-
-
-//Large Blue Triangle (TODO)
-const glm::mat4 LargeBlueTri =
-glm::translate(
-    glm::rotate(
-        glm::scale(glm::mat4(1.0f), glm::vec3(2.5f, 1.0f, 1.0f)),
-        glm::radians(0.0f),        
-        glm::vec3(0.0f, 0.0f, 1.0f)  // eixo Z (2D)
-    ),
-    glm::vec3(0.0f, 0.0f, 1.0f)
-);
-
-
-//Large Pink Triangle (TODO)
-const glm::mat4 LargePinkTri =
-glm::translate(
-    glm::rotate(glm::mat4(1.0f), glm::radians(45.0f), glm::vec3(1.0f, 1.0f, 1.0f)),
-    glm::vec3(1.0f,-1.0f,0.0f));
-
-
-//Green Square
-
-//Orange Parallelogram
-*/
-
-
-
 void MyApp::drawScene() {
     // Drawing directly in clip space
     Shaders->bind();
 
 
-    // Pequeno Triângulo Laranja
+    // Pequeno Triângulo Vermelho
     glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.0f))
         * glm::scale(glm::mat4(1.0f), glm::vec3(0.4f, 0.4f, 1.0f));
-    // enviar cor laranja (R,G,B,A)
-
-    glUniform4f(ColorId, 1.0f, 0.5f, 0.0f, 1.0f);
+    glUniform4f(ColorId, 1.0f, 0.0f, 0.0f, 1.0f); // vermelho
     baseTriangle->draw(MatrixId, model);
 
     // Pequeno Triângulo Azul
     model = glm::translate(glm::mat4(1.0f), glm::vec3(0.8f, -1.0f, 0.0f))
         * glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 1.0f));
-    // enviar cor azul (R,G,B,A)
-
-    glUniform4f(ColorId, 0.0f, 0.4f, 1.0f, 1.0f);
+    glUniform4f(ColorId, 0.0f, 0.4f, 1.0f, 1.0f); // azul
     baseTriangle->draw(MatrixId, model);
 
+    // Quadrado Verde
+    model = glm::translate(glm::mat4(1.0f), glm::vec3(-0.5f, 0.2f, 0.0f))
+        * glm::scale(glm::mat4(1.0f), glm::vec3(0.6f, 0.6f, 1.0f));
+    glUniform4f(ColorId, 0.1f, 0.8f, 0.2f, 1.0f); // verde
+    baseSquare->draw(MatrixId, model);
 
-
-
-    // Quadrado Verde 
-    /*
-    model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.4f, 0.0f))
-        * glm::scale(glm::mat4(1.0f), glm::vec3(0.5f, 0.5f, 1.0f));
-    baseSquare->draw(MatrixId, model); */
+    // Paralelogramo Laranja
+    model = glm::translate(glm::mat4(1.0f), glm::vec3(0.7f, 0.0f, 0.0f))
+        * glm::scale(glm::mat4(1.0f), glm::vec3(0.8f, 0.5f, 1.0f));
+    glUniform4f(ColorId, 1.0f, 0.5f, 0.0f, 1.0f); // laranja
+    baseParallelogram->draw(MatrixId, model);
 
 
 
@@ -249,7 +197,7 @@ void MyApp::drawScene() {
 
 
 void MyApp::initCallback(GLFWwindow* win) {
-    createShaderProgram(); // Mantém o shader
+    createShaderProgram(); 
 
     // Criar shapes base
     baseTriangle = new Shape(RightTriangleVertices, sizeof(RightTriangleVertices),
